@@ -1,0 +1,177 @@
+<apex:page id="AgentExplorer" title="Explorador de subscripciones" controller="GE_AgentExplorer_Controller" lightningStylesheets="true">
+    <apex:slds />
+    <apex:stylesheet value="{!$Resource.GE_AgentExplorer_css}" />
+    <apex:includeScript value="{!$Resource.GE_AgentExplorer_js}" loadOnReady="true"/>
+
+    <script type="text/javascript">
+    const user = JSON.parse('{!currentUserJSON}');
+    
+    function performCall (fieldName) {
+        let subscriber = JSON.parse('{!subscriberJSON}');
+        const phone = parseInt(document.getElementById('AgentExplorer:subscriberForm:accountInfo:accInfoCmp:' + fieldName).value);
+        
+        GE_AgentExplorer_Controller.performCall(subscriber.Id, phone, function(result,event){
+            setTimeout(function() { 
+                const callDivs = document.getElementsByClassName("call-enabled-icon");
+                const callHiddenDivs = document.getElementsByClassName("call-disabled-icon");
+                
+                for(let div of callDivs) {
+                    div.style.display = 'inline';
+                }
+                
+                for(let div of callHiddenDivs) {
+                    div.style.display = 'none';
+                }
+            }, 20000);
+        });
+        const callDivs = document.getElementsByClassName("call-enabled-icon");
+        const callHiddenDivs = document.getElementsByClassName("call-disabled-icon");
+        
+        for(let div of callDivs) {
+            div.style.display = 'none';
+        }
+        
+        for(let div of callHiddenDivs) {
+            div.style.display = 'inline';
+        }
+    }
+    
+    function sendEmail () {
+        debugger;
+        
+        let subscriber = JSON.parse('{!subscriberJSON}');
+        const name = document.getElementById('AgentExplorer:subscriberForm:accountInfo:accInfoCmp:personName').value;
+        const lastname = document.getElementById('AgentExplorer:subscriberForm:accountInfo:accInfoCmp:personLastName').value;
+        const email = document.getElementById('AgentExplorer:subscriberForm:accountInfo:accInfoCmp:personEmail').value;
+        const personPhone = document.getElementById('AgentExplorer:subscriberForm:accountInfo:accInfoCmp:personMobilePhone').value;
+        const personHomePhone = document.getElementById('AgentExplorer:subscriberForm:accountInfo:accInfoCmp:personHomePhone').value;
+        const personState = document.getElementById('AgentExplorer:subscriberForm:accountInfo:accInfoCmp:state-option').value;
+		const campaign = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:campaign').innerHTML;   
+        const postponePersonField = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:postponePersonField').value;   
+        const postponeDatetimeField = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:postponeDatetimeField').value;   
+        const nonEngagedReasonField = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:nonEngagedReasonField').value;   
+        const invalidReasonField = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:invalidReasonField').value;   
+        const holderEmail = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:holderEmail').value;   
+        const electricalCompanySelect = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:electricalCompanySelect').value;   
+        const otherElectricalCompany = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:otherElectricalCompany').value;   
+        const electricalCUPS = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:electricalCUPS').value;   
+        const electricalPower = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:electricalPower').value;   
+        const electricalPermanence = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:electricalPermanence').value;   
+        const otherGasCompany = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:otherGasCompany').value;   
+        const gasCUPS = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:gasCUPS').value;   
+        const gasCompanySelect = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:gasCompanySelect').value;   
+        const gasLot = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:gasLot').value;   
+        const gasPermanence = document.getElementById('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:gasPermanence').value;   
+		const template = document.getElementById('AgentExplorer:subscriberForm:controls:controls:emailTemplateSelect').value;
+        
+        GE_AgentExplorer_Controller.sendEmail(subscriber.Id, template, name, lastname, email, personPhone, personHomePhone, 
+                                              personState,  campaign, postponePersonField, postponeDatetimeField, nonEngagedReasonField, 
+                                              invalidReasonField,  holderEmail,  electricalCompanySelect, otherElectricalCompany, 
+                                              electricalCUPS,  electricalPower, electricalPermanence, otherGasCompany, gasCUPS, 
+                                              gasCompanySelect, gasLot,  gasPermanence, function(result,event) {
+			var mail = document.createElement("a");
+            mail.href = 'mailto:'+result.emailTo+'?subject='+result.subject+'&body='+encodeURIComponent(result.body);
+            mail.click();
+        });
+
+        return false;
+    }
+    
+    function blockSubscriber (subscriberId) {
+        let subscriberToBlock = {};
+        
+        // If subscriber is not null, copy only the id to block the record.
+        if(subscriberId != null) {
+            subscriberToBlock = {Id: subscriberId};
+            
+            GE_AgentExplorer_Controller.blockSubscriber(subscriberToBlock, function(result,event){
+                
+            });
+        }
+        
+    }
+    
+    
+    function blockSubscriberWrapper() {
+        let subscriber = JSON.parse('{!subscriberJSON}');
+        blockSubscriber(subscriber.Id);
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        blockSubscriberWrapper();
+        performCall('personMobilePhone');
+    }, false);
+    </script>
+    <apex:outputPanel rendered="{! ISBLANK(subscriber) }">
+        <div class="column">
+        </div>
+        <div class="column column-middle">
+            <div class="row">
+                <div class="slds-col slds-text-align_center">
+                    <apex:image value="{!URLFOR($Resource.GanaEnergiaLogo_Large)}" styleClass="landing-logo"/>
+                </div>
+            </div>
+            <div class="row">
+                Por el momento, no tienes más suscriptores asignados a tí. Por favor, inténtalo de nuevo más tarde.
+            </div>
+            <div class="row">
+                <apex:form >
+                    <apex:commandButton styleClass="slds-button slds-button--brand slds-button--neutral slds-not-selected" action="{!cancel}" value="Volver"/>
+                </apex:form> 
+            </div>
+        </div>
+        <div class="column">
+        </div>
+    </apex:outputPanel>
+    
+    <apex:outputPanel rendered="{! NOT(ISBLANK(subscriber)) }">
+        <apex:form id="subscriberForm">
+                    <apex:pageMessages escape="false"/> 
+            <div class="column">
+                <div class="row">
+                    <c:GE_AgentExplorer_AccountInfo id="accountInfo" cStateList="{! stateList }" cSubscriberAccount="{! subscriberAccount }"/>
+                </div>    
+                <div class="row">
+                    <c:GE_AgentExplorer_AccountActivities cSubscriberAccount="{! subscriberAccount }"/>
+                </div>
+            </div>
+            
+            <div class="column column-middle">
+                <apex:outputPanel rendered="{! NOT(ISBLANK(subscriberCase)) }">
+                    <div class="row">
+                        <c:GE_AgentExplorer_CaseInfo cCampaignSubscription="{! subscriber }" cPrioridadesCampana="{! priorities }" cCase="{! subscriberCase }" cCaseTypes="{! caseTypeList }"/>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{! ISBLANK(subscriberCase) }">
+                    <div class="row">
+                        <c:GE_AgentExplorer_SubCampInfo id="campaignSubscriptionInfo" cCampaignSubscription="{! subscriber }" cPrioridadesCampana="{! priorities }"/>
+                    </div>
+                </apex:outputPanel>
+                <div class="row">
+                    <c:GE_AgentExplorer_AccountHistoryInfo cAccountHistory="{! accountHistorical }" cAccountCaseHistory="{! accountCaseHistorical }" cAccountContractHistory="{! accountContractHistorical }"/>
+                    <!-- <c:GE_AgentExplorer_ActionsInfo cInteractions="{! interactions }"/> -->
+                </div>
+                <div class="row">
+                    <c:GE_AgentExplorer_HistoryInfo cHistoricoSubscriptor="{! historical }" cInteractions="{! interactions }"/>
+                </div>
+            </div>
+            <div class="column">
+                <div class="row row-center">
+                    <apex:commandButton id="cancelBtn" styleClass="slds-button slds-button--destructive slds-not-selected" action="{!cancel}" value="Cerrar y salir"/>
+                    <apex:commandButton id="nextBtn" styleClass="slds-button slds-button--brand slds-not-selected" action="{!next}" value="Siguiente subscriptor"/>
+                </div>
+                
+                <div class="row row-center">
+                    <c:GE_AgentExplorer_Controls id="controls"/>
+                    
+                </div>
+                <div class="row">
+                    <c:GE_AgentExplorer_ObservationsInfo cSubscripcionCampana="{! subscriber }"/>
+                </div>
+                <div class="row">
+                    <c:GE_AgentExplorer_AccountListMembership cSubscriberAccount="{! subscriberAccount }"/>
+                </div>
+            </div>
+        </apex:form>
+    </apex:outputPanel>
+</apex:page>

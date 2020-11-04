@@ -1,0 +1,19 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>
+    </head>
+    
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+Lo primero: gracias por contactar con nosotros.
+    
+Con Gana Energía puedes tener tarifas realmente justas a un precio muy económico. Te dejo el link para que puedas verlas todas.
+Además de ser una de las compañías más económicas del mercado, con nosotros siempre tendrás una atención al cliente personalizada, energía 100% renovable y un contrato siempre por escrito, nuestros clientes nos destacan por la transparencia y podrás observarlo en cualquier opinión que veas en Google.
+
+¿Quieres probar con nosotros? Como no tenemos permanencia, nunca perderás con Gana Energía y siempre ganarás en ahorro así como en tranquilidad. Nosotros nos ocupamos de todo el papeleo. Tú no te tienes que preocupar de nada. 
+
+Espero tu respuesta ante cualquier duda que te pueda surgir.
+
+Un saludo
+</div>
+</apex:page>

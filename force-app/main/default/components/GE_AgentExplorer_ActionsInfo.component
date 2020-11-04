@@ -1,0 +1,43 @@
+<apex:component >
+    <apex:attribute name="cInteractions" description="" type="map" required="true"/>
+    
+    <article class="slds-card section account-section">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-custom-custom109 svg-icon" title="account" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <svg aria-hidden="true" class="slds-icon">
+                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/custom-sprite/svg/symbols.svg#custom109')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Todos</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                        	<span><b>Todos</b></span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+                <table class="account-data">
+                    <tr class="account-data-row">
+                        <th>Llamadas: </th>
+                        <td>{! cInteractions['Llamada'] }</td>
+                    </tr>
+                    <tr class="account-data-row">
+                        <th>Email: </th>
+                        <td>{! cInteractions['Email'] }</td>
+                    </tr>
+                    <tr class="account-data-row">
+                        <th>Chat: </th>
+                        <td>{! cInteractions['Chat'] }</td>
+                    </tr>
+                    <tr class="account-data-row">
+                        <th>Otros:</th>
+                        <td>{! cInteractions['Otro'] }</td>
+                    </tr>
+                </table>
+            </div>
+        </article>
+</apex:component>

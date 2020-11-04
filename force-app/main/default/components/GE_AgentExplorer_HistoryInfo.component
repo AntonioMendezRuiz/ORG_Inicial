@@ -1,0 +1,109 @@
+<apex:component >
+    <apex:attribute name="cHistoricoSubscriptor" 		description="" 		type="HistoricoDeSubscriptor__c[]" 		required="true"/>
+    <apex:attribute name="cInteractions" description="" type="map" required="true"/>
+    
+    <article id="historical" class="slds-card section account-section">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-custom-custom57 svg-icon" title="account" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg aria-hidden="true" class="slds-icon">
+                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/custom-sprite/svg/symbols.svg#custom57')}"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Histórico</span>
+                    </span>
+                </div>
+                <div class="slds-media__body" style="display: inherit">
+                    <h2 class="slds-card__header-title">
+                        <span><b>Histórico de la subscripción</b></span>
+                    </h2>
+                    <div>
+                        <ul id="actions-list">
+                            <li>
+                                <span class="slds-icon_container slds-icon-utility-announcement" title="Description of icon when needed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <svg class="slds-icon slds-icon-text-default slds-icon_x-small" aria-hidden="true">
+                                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#comments')}"></use>
+                                    </svg>
+                                    <span>{! cInteractions['Chat'] }</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="slds-icon_container slds-icon-utility-announcement" title="Description of icon when needed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <svg class="slds-icon slds-icon-text-default slds-icon_x-small" aria-hidden="true">
+                                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#email')}"></use>
+                                    </svg>
+                                    <span>{! cInteractions['Email'] }</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="slds-icon_container slds-icon-utility-announcement" title="Description of icon when needed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <svg class="slds-icon slds-icon-text-default slds-icon_x-small" aria-hidden="true">
+                                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#call')}"></use>
+                                    </svg>
+                                    <span>{! cInteractions['Llamada'] }</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="slds-icon_container slds-icon-utility-announcement" title="Description of icon when needed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <svg class="slds-icon slds-icon-text-default slds-icon_x-small" aria-hidden="true">
+                                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#diamond')}"></use>
+                                    </svg>
+                                    <span>{! cInteractions['Otro'] }</span>
+                                </span>
+                            </li>
+                        </ul>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner" >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered" >
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="table-icon"></th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate">Fecha de interacción</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate">Tipo de interacción</div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="slds-scrollable_y" style="max-height:8.8rem !important">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <tbody>
+                        <apex:repeat value="{!cHistoricoSubscriptor}" var="lineaHistorico">
+                            <tr class="slds-hint-parent">
+                                <td class="table-icon">
+                                    <span class="slds-icon_container slds-icon-utility-announcement" title="Description of icon when needed" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <svg class="slds-icon slds-icon-text-default slds-icon_x-small" aria-hidden="true">
+                                            <use xlink:href="{!URLFOR($Asset.SLDS, 
+                                                             CASE(lineaHistorico.TipoDeInteraccion__c, 
+                                                             'Chat', 'assets/icons/utility-sprite/svg/symbols.svg#comments', 
+                                                             'Email', 'assets/icons/utility-sprite/svg/symbols.svg#email', 
+                                                             'Llamada', 'assets/icons/utility-sprite/svg/symbols.svg#call', 
+                                                             'assets/icons/utility-sprite/svg/symbols.svg#diamond')         
+                                                             )}"></use>
+                                        </svg>
+                                        <span class="slds-assistive-text">Description of icon when needed</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate"><apex:outputField value="{!lineaHistorico.FechaHoraInteraccion__c}"/></div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate"><apex:outputField value="{!lineaHistorico.TipoDeInteraccion__c}"/></div>
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>               
+            </div>
+        </div>
+    </article>
+</apex:component>

@@ -1,0 +1,113 @@
+<apex:component id="accInfoCmp">
+    <apex:attribute name="cSubscriberAccount" description="" type="Account" required="true"/>
+    <apex:attribute name="cStateList" description="" type="SelectOption[]" required="true"/>
+    <apex:attribute name="cState" description="" type="String" />
+    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        
+        <article class="slds-card section account-section">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-account svg-icon" title="account" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <svg aria-hidden="true" class="slds-icon">
+                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#account')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Cuenta</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span><b>Cuenta</b></span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+                <table class="account-data">
+                    <tr class="account-data-row" >
+                        <th>Nombre: </th>
+                    </tr>
+                    <tr>
+                        <td><apex:inputText id="personName" styleClass="slds-input" value="{!cSubscriberAccount.firstname}"/></td>
+                    </tr>
+                    <!-- 
+                    <tr class="account-data-row">
+                        <th>Apellido: </th>
+                    </tr>
+                    <tr>
+                        <td><apex:inputText styleClass="slds-input" value="{!cSubscriberAccount.middlename}"/></td>
+                    </tr>-->
+                    <tr class="account-data-row">
+                        <th>Apellidos: </th>
+                    </tr> 
+                    <tr>
+                        <td>
+                            <span style="color: red; display:inline-block; position:absolute; left:3px; float:left;">* </span><apex:inputText id="personLastName" styleClass="slds-input" value="{!cSubscriberAccount.lastname}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr class="account-data-row">
+                        <th>Email: </th>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField id="personEmail" styleClass="slds-input" value="{!cSubscriberAccount.PersonEmail}" /></td>
+                    </tr>
+                    <tr class="account-data-row">
+                        <th>Teléfono: </th>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField id="personHomePhone" styleClass="slds-input" value="{!cSubscriberAccount.PersonHomePhone}"/></td>
+                        <td style="width:10px !important;">
+                            <div class="call-enabled-icon">
+                                <svg class="slds-button__icon slds-icon--small call-icon" aria-hidden="true" onclick="performCall('personHomePhone')" style="fill: #c8dd15;"> 
+                                    <use xlink:href="{!URLFOR($Asset.SLDS,'assets/icons/standard-sprite/svg/symbols.svg#call')}">
+                                    </use>
+                                </svg>
+                            </div>
+                            <div class="call-disabled-icon">
+                                <svg class="slds-button__icon slds-icon--small" aria-hidden="true" style="fill: gray;"> 
+                                    <use xlink:href="{!URLFOR($Asset.SLDS,'assets/icons/standard-sprite/svg/symbols.svg#call')}">
+                                    </use>
+                                </svg>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="account-data-row">
+                        <th>Teléfono Móvil: </th>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField id="personMobilePhone" styleClass="slds-input" value="{!cSubscriberAccount.PersonMobilePhone}" required="true"/>
+                            
+                        </td>
+                        <td style="width:10px !important;">
+                            <div class="call-enabled-icon">
+                                <svg class="slds-button__icon slds-icon--small call-icon" aria-hidden="true" onclick="performCall('personMobilePhone')" style="fill: #c8dd15;"> 
+                                    <use xlink:href="{!URLFOR($Asset.SLDS,'assets/icons/standard-sprite/svg/symbols.svg#call')}">
+                                    </use>
+                                </svg>
+                            </div>
+                            <div class="call-disabled-icon">
+                                <svg class="slds-button__icon slds-icon--small" aria-hidden="true" style="fill: gray;"> 
+                                    <use xlink:href="{!URLFOR($Asset.SLDS,'assets/icons/standard-sprite/svg/symbols.svg#call')}">
+                                    </use>
+                                </svg>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="account-data-row">
+                        <th>Provincia: </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:selectList styleClass="slds-input" value="{! cSubscriberAccount.PersonMailingStateCode }" id="state-option" size="1">
+                                <apex:selectOptions value="{!cStateList}"/>
+                            </apex:selectList>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </article>
+        
+    </html>
+    
+</apex:component>

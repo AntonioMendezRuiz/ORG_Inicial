@@ -1,0 +1,10 @@
+<apex:page >
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+
+Como nos has solicitado, procedemos a realizar el cambio de domiciliación bancaria. Recordarte que si ya tienes alguna factura emitida, ésta aún pasará por tu actual cuenta. Para próximas facturas ya verás aplicado el cambio. 
+
+Un saludo. 
+
+</div>
+</apex:page>

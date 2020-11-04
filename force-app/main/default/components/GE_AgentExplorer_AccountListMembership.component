@@ -1,0 +1,9 @@
+<apex:component >
+    <apex:attribute name="cSubscriberAccount" description="" type="Account" required="true"/>
+    
+    <article class="slds-card section account-section">
+        <div class="slds-card__body slds-card__body_inner">
+    		<iframe style="border:0px" height="200px" src="/apex/pi__PardotAccountListMembershipMobile?id={! cSubscriberAccount.id }" width="100%"></iframe>
+        </div>
+    </article>
+</apex:component>

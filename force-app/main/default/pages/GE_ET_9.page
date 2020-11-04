@@ -1,0 +1,10 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" >
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+
+Te envío la información de la tarifa por la que te has interesado. 
+Si necesitas ayuda puedes responder este mail o encontrarnos telefónicamente de lunes a viernes de 9:00h a 21:00h a través del 900 53 56 89.
+
+¡Te esperamos!
+</div>
+</apex:page>

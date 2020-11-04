@@ -1,0 +1,15 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>
+    </head>
+    
+<div id="emailTemplate">
+Hola,
+
+Como hemos hablado, te adjuntamos la tarifa eléctrica por la que te has interesado.
+
+Si tienes cualquie tipo de duda,  puedes responder este mail o encontrarnos telefónicamente de lunes a viernes de 9:00h a 21:00h a través de nuestro número gratuito 900 53 56 89.
+
+¡Te esperamos!
+</div>
+</apex:page>

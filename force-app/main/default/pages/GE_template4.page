@@ -1,0 +1,18 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" >
+    
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+
+Tras nuestra conversación, a este correo puedes enviarme tu actual factura eléctrica para realizarte el estudio y conseguir el ahorro que estás buscando.
+
+Recordarte que este servicio es gratuito y sin compromiso.
+
+Ante cualquier duda, puedes responderme a través de este email o ponerte en contacto a través de nuestro teléfono gratuito 900 53 56 89 en nuestro horario comercial de lunes a viernes de 9:00h a 21:00h.
+
+También puedes saber más de nosotros visitando nuestra web www.ganaenergia.com.
+
+¡Te esperamos!
+</div>
+
+
+</apex:page>

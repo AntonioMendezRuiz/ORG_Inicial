@@ -1,0 +1,12 @@
+<apex:page >
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+
+El cambio de potencia implica un coste de [añadir precio]. Este cambio se realizará entre 1 y 15 días hábiles. Informarte que solo se puede hacer un cambio de potencia cada 12 meses. Para realizar el cambio necesitamos que nos confirmes que todo lo descrito te parece correcto.
+
+Muchas gracias.
+
+Un saludo.
+
+</div>
+</apex:page>

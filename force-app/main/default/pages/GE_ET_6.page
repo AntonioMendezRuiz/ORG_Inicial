@@ -1,0 +1,14 @@
+<apex:page >
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+    
+Para poder realizar el cambio de titular, el nuevo titular deberá firmar un nuevo contrato con Gana Energía. Se le enviará a éste al correo electrónico que nos has facilitado. En este, recibirás todas las instrucciones para poder realizar la firma digital mediante cualquier dispositivo. 
+
+A partir de la firma, se continúa con la gestión del cambio y este se realiza entre 1-15 días. Recordar que si durante el proceso de cambio se emite una factura se le cobrará al titular existente en ese momento sin tener en cuenta qué lectura es de cada uno. 
+
+Ante cualquier duda, responde este email.
+
+Un saludo
+
+</div>
+</apex:page>

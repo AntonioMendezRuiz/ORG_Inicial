@@ -1,0 +1,26 @@
+<apex:page controller="GE_AgentExplorer_Landing_Controller" title="Explorador de subscripciones">
+    <apex:slds />
+    <apex:stylesheet value="{!$Resource.GE_AgentExplorer_css}" />
+    
+    <div class="slds-grid slds-gutters slds-gutters_direct slds-p-around_small">
+        <div class="slds-col slds-text-align_center">
+            <apex:image value="{!URLFOR($Resource.GanaEnergiaLogo_Large)}" styleClass="landing-logo"/>
+        </div>
+    </div>
+    
+        <div class="slds-grid slds-gutters slds-gutters_direct slds-p-around_small">
+        <div class="slds-col slds-text-align_center">
+            <div class="slds-box text-justify">
+            	{! $Label.AgentAppAnnouncement }
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-grid slds-gutters slds-gutters_direct slds-p-around_small">
+        <div class="slds-col slds-text-align_center">
+            <apex:form >
+                <apex:commandButton styleClass="slds-button slds-button--brand slds-button--neutral slds-not-selected" action="{!start}" value="Comenzar"/>
+            </apex:form> 
+        </div>
+    </div>
+</apex:page>

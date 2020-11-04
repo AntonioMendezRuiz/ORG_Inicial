@@ -1,0 +1,19 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>
+    </head>
+    
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+
+Hemos recibido la solicitud de cambio de compañía y como ya sabes con nosotros no tienes permanencia, pero realmente nos importas.
+
+Desde Gana Energía estamos convencidos de contar con los precios más bajos del sector por encima de cualquier oferta puntual.
+
+Por ello queremos conocer el motivo de tu marcha, analizar si tu tarifa es la adecuada para obtener el máximo ahorro e informarte sobre nuestras ofertas vigentes desde nuestro teléfono gratuito.
+
+Llámanos gratuitamente al 900 53 56 89 para analizar tu caso. 
+
+Un saludo. 
+</div>
+</apex:page>

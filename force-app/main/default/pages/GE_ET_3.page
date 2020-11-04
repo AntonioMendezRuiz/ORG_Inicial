@@ -1,0 +1,14 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" >
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+
+Nos ponemos en contacto contigo por el formulario que nos has enviado sobre información en tarifas eléctricas. {! IF(NOT(ISBLANK($CurrentPage.parameters.personPhone)), 'Te hemos llamado al ' + $CurrentPage.parameters.personPhone, 'Te hemos intentado llamar,' )} pero no ha sido posible hablar contigo.
+
+Indícanos respondiendo este email cuándo te viene bien que nos pongamos en contacto contigo. Nuestros clientes ya consiguen un ahorro de hasta el 25% en comparación a su antigua compañía eléctrica.
+
+También puedes encontrarnos de lunes a viernes de 9:00h a 21:00h siempre que quieras en nuestro teléfono gratuito, el 900 53 56 89.
+
+Somos Gana Energía, una empresa de energía de bajo coste. ¡Te esperamos!
+
+</div>
+</apex:page>

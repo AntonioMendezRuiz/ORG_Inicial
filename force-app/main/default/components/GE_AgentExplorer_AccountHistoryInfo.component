@@ -1,0 +1,167 @@
+<apex:component >
+    <apex:attribute name="cAccountHistory" 		description="" 		type="SubscripcionACampana__c[]" 		required="true"/>
+    <apex:attribute name="cAccountCaseHistory" 		description="" 		type="Case[]" 		required="true"/>
+    <apex:attribute name="cAccountContractHistory" 		description="" 		type="Contract[]" 		required="true"/>
+    
+    <article class="slds-card section account-section">
+        <div class="slds-tabs_default">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-article svg-icon" title="account" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <svg aria-hidden="true" class="slds-icon">
+                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#article')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Histórico de Subscripciones</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <ul class="slds-tabs_default__nav" role="tablist">
+                                <li id="tab-header-default-0" class="slds-tabs_default__item slds-is-active" role="presentation">
+                                    <a class="slds-tabs_default__link" onclick="toggleHistoricalTabs(this.tabIndex);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item"><span><b>Hist. de Subscripciones</b></span></a>
+                                </li>
+                                <li id="tab-header-default-1" class="slds-tabs_default__item" role="presentation">
+                                    <a class="slds-tabs_default__link" onclick="toggleHistoricalTabs(this.tabIndex);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item"><span><b>Hist. de Casos</b></span></a>
+                                </li>
+                                <li id="tab-header-default-2" class="slds-tabs_default__item" role="presentation">
+                                    <a class="slds-tabs_default__link" onclick="toggleHistoricalTabs(this.tabIndex);" role="tab" tabindex="-2" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item"><span><b>Hist. de Contratos</b></span></a>
+                                </li>
+                            </ul>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+                <div id="tab-default-0" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered" >
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate">Fecha</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate">Campaña</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate">Estado</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate">Motivo</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!cAccountHistory}" var="subscription">
+                                <tr class="slds-hint-parent">
+                                    
+                                    <td>
+                                        <apex:outputText value="{0, date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{! subscription.LastModifiedDate }" /> 
+                                        </apex:outputText>
+                                    </td>
+                                    <td>{! subscription.Campana__r.Name }</td>
+                                    <td>{! subscription.PrioridadDeCampana__r.Name }</td>
+                                    <td>{! subscription.MotivoDePerdida__c }</td>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="tab-default-1" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
+                    <div style="overflow-x:auto">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered" >
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate">Número de Caso</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate">Fecha Apertura</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate">Fecha Cierre</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate">Origen</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate">Tipo</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate">Estado</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate">Asunto</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate">Descripción</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!cAccountCaseHistory}" var="case">
+                                    <tr class="slds-hint-parent">
+                                        <td>{! case.CaseNumber }</td>
+                                        <td>
+                                            <apex:outputText value="{0, date,dd'/'MM'/'yyyy}">
+                                                <apex:param value="{! case.CreatedDate }" /> 
+                                            </apex:outputText></td>
+                                        <td>
+                                            <apex:outputText value="{0, date,dd'/'MM'/'yyyy}">
+                                                <apex:param value="{! case.ClosedDate }" /> 
+                                            </apex:outputText></td>
+                                        <td>{! case.Origin }</td>
+                                        <td>{! case.Tipo__c }</td>
+                                        <td>{! case.Status }</td>
+                                        <td>{! case.Subject }</td>
+                                        <td>
+                                            <div class="ellipsis">
+                                            	<apex:outputText value="{! case.Description }" escape="true" />
+											</div>
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>                        
+                    </div>
+                </div>
+                <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered" >
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate">Fecha de Inicio</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate">Fecha de Finalización</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate">Campaña</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!cAccountContractHistory}" var="contract">
+                                <tr class="slds-hint-parent">
+                                    
+                                    <td>
+                                        <apex:outputText value="{0, date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{! contract.StartDate }" /> 
+                                        </apex:outputText>
+                                    </td>
+                                    <td>
+                                        <apex:outputText value="{0, date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{! contract.EndDate }" /> 
+                                        </apex:outputText>
+                                    </td>
+                                    <td>CAMPAÑA</td>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</apex:component>

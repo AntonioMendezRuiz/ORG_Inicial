@@ -1,0 +1,16 @@
+<apex:component controller="GE_AgentExplorer_Controller" allowDML="true" id="controls">
+    <div class="row row-center">
+        <apex:selectList multiselect="false" size="1" id="emailTemplateSelect">
+            <apex:selectOptions value="{!templates}"/>
+        </apex:selectList>
+        
+        <button class="slds-button slds-button_neutral" onclick="return sendEmail();">Enviar email</button>
+    </div>
+    <!--
+    <div class="row row-center">
+    <apex:commandButton styleClass="slds-button slds-button_outline-brand slds-not-selected" value="Enviar plantilla 1"/>
+    <apex:commandButton styleClass="slds-button slds-button_outline-brand slds-not-selected" value="Enviar plantilla 2"/>
+    <apex:commandButton styleClass="slds-button slds-button_outline-brand slds-not-selected" value="Enviar plantilla 3"/>
+    <apex:commandButton styleClass="slds-button slds-button_outline-brand slds-not-selected" value="Enviar plantilla 4"/>
+    </div>-->
+</apex:component>

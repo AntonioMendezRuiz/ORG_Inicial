@@ -1,0 +1,25 @@
+<apex:component >
+    	<apex:attribute name="cSubscripcionCampana" description="" type="SubscripcionACampana__c" required="true"/>
+        <article class="slds-card section account-section">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-custom-custom39 svg-icon" title="account" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <svg aria-hidden="true" class="slds-icon">
+                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/custom-sprite/svg/symbols.svg#custom39')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Observaciones</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                        	<span><b>Observaciones</b></span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+                <apex:inputField value="{!cSubscripcionCampana.Descripcion__c}"/>
+            </div>
+        </article>
+</apex:component>

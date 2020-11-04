@@ -1,0 +1,16 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" >
+<div id="emailTemplate">
+Hola {!$CurrentPage.parameters.name},
+Nos alegra saber que vas a formar parte de una eléctrica que realmente sí piensa en las personas. 
+
+Te detallo qué datos necesitamos para formalizar el contrato que te enviaremos para que puedas leerlo y firmarlo (ante todo, transparencia). 
+- Datos personales del titular: Nombre y apellidos. DNI o NIF, teléfono de contacto y correo electrónico.
+- Datos de la dirección donde vamos a cambiar la luz: Dirección completa que aparece en la factura, CUPS (es un número largo que empieza por ES. Lo puedes encontrar en la misma factura) y potencia actual (Ej: 3,3kw). 
+- Datos bancarios: Número IBAN para domiciliar la factura. 
+
+Por último y a modo de encuesta, ¿utilizas gas natural en el domicilio o es todo eléctrico? y ¿cómo nos conociste?
+    
+Muchas gracias por tu tiempo.
+Ante cualquier duda, puedes responder este mismo email o llamarme gratuitamente al 900 53 56 89.
+</div>
+</apex:page>

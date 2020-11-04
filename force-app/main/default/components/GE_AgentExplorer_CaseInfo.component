@@ -1,0 +1,114 @@
+<apex:component >
+    <apex:attribute name="cCase" description="" type="Case" />
+    <apex:attribute name="cCaseTypes" description="" type="SelectOption[]" />
+    <apex:attribute name="cCampaignSubscription" 	description="" 		type="SubscripcionACampana__c" 		required="true"/>
+    <apex:attribute name="cPrioridadesCampana" 		description="" 		type="SelectOption[]" 				required="true"/>
+    
+    <article class="slds-card section">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-case svg-icon" title="account" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg aria-hidden="true" class="slds-icon">
+                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#case')}"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Caso</span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span><b>Caso</b></span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <table class="account-data">
+                <tr class="account-data-row">
+                    <th>Número del caso: </th>
+                </tr>
+                <tr>
+                    <td><apex:outputText value="{! cCase.CaseNumber}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Campaña del caso: </th>
+                </tr>
+                <tr>
+                    <td><apex:outputField value="{! cCampaignSubscription.Campana__r.Name }"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Estado: </th>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:selectList id="statusField" styleClass="slds-input" onchange="onChangeStatusField(this.id);" value="{! cCampaignSubscription.PrioridadDeCampana__c }" size="1">
+                            <apex:selectOptions value="{!cPrioridadesCampana}"/>
+                        </apex:selectList>                       
+                    </td>
+                </tr>
+                                <tr class="nonengaged-row">
+                    <td>
+                        <span style="margin-right:1rem">Motivo:</span><apex:inputField id="nonEngagedReasonField" value="{!cCampaignSubscription.MotivoDePerdida__c}"/>
+                    </td>
+                </tr>
+                <tr class="postpone-row">
+                    <td>
+                        <span style="margin-right:1rem">Aplazado a:</span><apex:inputField id="postponePersonField" value="{!cCampaignSubscription.AplazadoA__c}"/>
+                    </td>
+                </tr>
+                <tr class="postpone-row">
+                    <td>
+                        <span style="margin-right:1rem">Fecha/Hora:</span> <apex:inputField id="postponeDatetimeField" value="{!cCampaignSubscription.FechaHoraAplazamiento__c}"/>
+                    </td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Fecha Apertura: </th>
+                </tr>
+                <tr>
+                    <td><apex:outputText value="{! cCase.CreatedDate}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Fecha Cierre: </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField styleClass="slds-input" value="{!cCase.ClosedDate}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Origen </th>
+                </tr>
+                <tr>
+                    <td><apex:outputText value="{! cCase.Origin}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Tipo: </th>
+                </tr>
+                <tr class="account-data-row">
+                    <td style="width:100%;">
+                        <apex:selectList styleClass="slds-input" value="{! cCase.Tipo__c }" size="1">
+                            <apex:selectOptions value="{!cCaseTypes}"/>
+                        </apex:selectList>    
+                    </td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Asunto: </th>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:outputText value="{! cCase.Subject}"/>
+                    </td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Descripción: </th>
+                </tr>
+                <tr class="account-data-row">
+                    <td>
+                        <div style="max-width: auto; scrollable-x:auto;">
+                            <apex:outputText value="{! cCase.Description}"/>
+                        </div>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </article>
+</apex:component>

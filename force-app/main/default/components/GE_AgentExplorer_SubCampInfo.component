@@ -1,0 +1,131 @@
+<apex:component id="CampaignSubscriptionInfoCmp">
+    <apex:attribute name="cCampaignSubscription" 	description="" 		type="SubscripcionACampana__c" 		required="true"/>
+    <apex:attribute name="cPrioridadesCampana" 		description="" 		type="SelectOption[]" 				required="true"/>
+    <article id="subscriberArticle" class="slds-card section account-section">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-custom-custom74 svg-icon" title="account" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg aria-hidden="true" class="slds-icon">
+                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/custom-sprite/svg/symbols.svg#custom74')}"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Datos de interés</span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span><b>Datos de interés</b></span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div id="subscriberArticleCardBody" class="slds-card__body slds-card__body_inner">
+            <table id="subscriberArticleCardBodyTable" class="account-data">
+                <tr class="account-data-row">
+                    <th>Campaña: </th>
+                </tr>
+                <tr>
+                    <td><apex:outputField id="campaign" value="{! cCampaignSubscription.Campana__r.Name }"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Estado en campaña: </th>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:selectList id="statusField" styleClass="slds-input" onchange="onChangeStatusField('AgentExplorer:subscriberForm:campaignSubscriptionInfo:CampaignSubscriptionInfoCmp:');" value="{! cCampaignSubscription.PrioridadDeCampana__c }" size="1">
+                            <apex:selectOptions value="{!cPrioridadesCampana}"/>
+                        </apex:selectList>                       
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="margin-right:1rem">Aplazado a:</span> <br/>
+                        <apex:inputField id="postponePersonField" value="{!cCampaignSubscription.AplazadoA__c}" />
+                    </td>
+                </tr>
+                <tr class="postpone-row"  style="display: none;">
+                    <td>
+                        <span style="margin-right:1rem">Fecha/Hora:</span> <br/>
+                        <apex:inputField id="postponeDatetimeField" value="{!cCampaignSubscription.FechaHoraAplazamiento__c}" />
+                    </td>
+                </tr>
+                <tr class="nonengaged-row"  style="display: none;">
+                    <td>
+                        <span style="margin-right:1rem">Motivo:</span><apex:inputField id="nonEngagedReasonField" value="{!cCampaignSubscription.MotivoDePerdida__c}"/>
+                    </td>
+                </tr>
+                <tr class="invalidreasonfield-row"  style="display: none;">
+                    <td>
+                        <span style="margin-right:1rem">Motivo:</span><apex:inputField id="invalidReasonField" value="{!cCampaignSubscription.MotivoInvalido__c}"/>
+                    </td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Email del titular del contrato: </th>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:inputField id="holderEmail" styleClass="slds-input" value="{!cCampaignSubscription.CorreoDelTitularDelContrato__c}"/>                     
+                    </td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Compañía actual (luz): </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField styleClass="slds-input" id="electricalCompanySelect" value="{!cCampaignSubscription.CompaniaActualLuz__c}" onchange="toggleOtherElectricalCompanyField(this.id);" /></td>
+                </tr>
+                <tr class="otherElectrical-row" style="display: none;">
+                    <td>
+                        <span style="margin-right:1rem">Nombre de la compañía alternativa: </span> <apex:inputField id="otherElectricalCompany" value="{!cCampaignSubscription.OtherElectricCompany__c}"/>
+                    </td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>CUPS (luz): </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField id="electricalCUPS" styleClass="slds-input" value="{!cCampaignSubscription.CUPSLuz__c}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Potencia: </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField id="electricalPower" styleClass="slds-input" value="{!cCampaignSubscription.Potencia__c}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Permanencia (luz): </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField id="electricalPermanence" styleClass="slds-input" value="{!cCampaignSubscription.PermanenciaLuz__c}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Compañía actual (gas): </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField styleClass="slds-input" id="gasCompanySelect" value="{!cCampaignSubscription.CompaniaActualGas__c}" onchange="toggleOtherGasCompanyField(this.id);"/></td>
+                </tr>
+                <tr class="otherGas-row" style="display: none;" >
+                    <td>
+                        <span style="margin-right:1rem">Nombre de la compañía alternativa: </span> <apex:inputField id="otherGasCompany" value="{!cCampaignSubscription.OtherGasCompany__c}"/>
+                    </td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>CUPS (gas): </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField id="gasCUPS" styleClass="slds-input" value="{!cCampaignSubscription.CUPSGas__c}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Tramo: </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField id="gasLot" styleClass="slds-input" value="{!cCampaignSubscription.Tramo__c}"/></td>
+                </tr>
+                <tr class="account-data-row">
+                    <th>Permanencia (gas): </th>
+                </tr>
+                <tr>
+                    <td><apex:inputField id="gasPermanence" styleClass="slds-input" value="{!cCampaignSubscription.PermanenciaGas__c}"/></td>
+                </tr>
+            </table>
+        </div>
+    </article>
+</apex:component>
